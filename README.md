@@ -94,7 +94,7 @@ A virus test check will run periodically via `/bin/bash -c '/tests/test_virus.sh
 
 The following are the test virus signature files in `/tests/virus/`:
 
-````bash
+```bash
 clam-v2.rar
 lam-v3.rar
 clam.cab
