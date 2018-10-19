@@ -1,4 +1,5 @@
 check process clamd-process with pidfile /run/clamav/clamd.pid
+    every 3 cycles
     start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
     stop program = "/bin/bash -c '/usr/bin/clam stop'"
     if cpu > 90% for 8 cycles then restart

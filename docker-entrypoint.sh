@@ -8,15 +8,21 @@ set -o xtrace
 function crond() {
 
   CRONFILE="/crontab.conf"
+  # Depending on deploment we will want to randomize the update time so all clamd nodes are not doing it at the same time
+  CRON_M=$((1 + RANDOM % 58))
+  CRON_H=$((1 + RANDOM % 4))
   if [[ -f "${CRONFILE}" ]]; then
     echo "OK: CRONFILE is present. Configuring crontab with settings in ${CRONFILE}..."
   else
     {
        echo 'SHELL=/bin/bash'
        echo 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-       echo '59 3 * * * /usr/bin/env bash -c 'freshclam --quiet' 2>&1'
+       echo '{{CRON_M}} {{CRON_H}} * * * /usr/bin/env bash -c 'freshclam --quiet' 2>&1'
     } | tee /crontab.conf
   fi
+
+  sed -i 's|{{CRON_H}}|'"${CRON_H}"'|g' /crontab.conf
+  sed -i 's|{{CRON_M}}|'"${CRON_M}"'|g' /crontab.conf
 
   # Load config
   cat ${CRONFILE} | crontab -
@@ -70,9 +76,10 @@ function freshclam() {
 
 function monit() {
 
-  # Start Monit
+  # Start Monit with delay to allow clam to startup and avoid race condition where monit attempts to start it prior to the command being passed
   {
     echo 'set daemon 10'
+    echo '   with START DELAY 30'
     echo 'set pidfile /var/run/monit.pid'
     echo 'set statefile /var/run/monit.state'
     echo 'set httpd port 2849 and'
