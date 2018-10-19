@@ -80,7 +80,7 @@ function monit() {
   } | tee /etc/monitrc
 
   find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{LOCALIPV4}}|'"${LOCALIPV4}"'|g' {} \;
-  find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{LOCALIPV4}}|'"${PUBLICIPV4}"'|g' {} \;
+  find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{PUBLICIPV4}}|'"${PUBLICIPV4}"'|g' {} \;
 
   chmod 700 /etc/monitrc
   run="monit -c /etc/monitrc" && bash -c "${run}"
