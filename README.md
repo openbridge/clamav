@@ -21,9 +21,17 @@ Next, to run the image you can use:
 ```bash
 docker run -d -p 3310:3310 openbridge/clamav
 ```
- or via a simpler approach is to use the included Docker compose file:
+ or via a simpler (recommended!) approach is to use the included Docker compose file:
 ```bash
 docker-compose up -d
+```
+
+The benefit of compose is the use of a Docker volume to hold the clam database files which allows them to persist across builds and updates. 
+
+```bash
+volumes:
+  clamd_data:
+    driver: local
 ```
 
 # Configuration
