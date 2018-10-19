@@ -21,7 +21,6 @@ RUN set -x \
     && mkdir -p /var/lib/clamav \
     && apk del .build-deps
 
-COPY cron/crontab.conf /crontab.conf
 COPY usr/bin/crond.sh /usr/bin/cron
 COPY usr/bin/clamd.sh /usr/bin/clam
 COPY etc/ /etc/
