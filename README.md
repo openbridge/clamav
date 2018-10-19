@@ -87,7 +87,7 @@ TestDatabases yes
 ReceiveTimeout 60
 ConnectTimeout 60
 ```
-Freshclam may be triggered by Monit as well. See below.
+Freshclam may be triggered by `/etc/monitrc` as well. See "Monitoring" below.
 
 # Virus Tests
 A virus test check will run periodically via `/bin/bash -c '/tests/test_virus.sh'`. This is run to validate that clamd is able to scan for known virus signatures. If this test fails, then the container will restart.
