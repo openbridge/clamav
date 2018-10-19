@@ -18,9 +18,6 @@ RUN set -x \
     && apk add --no-cache --virtual .build-deps \
         $CLAMD_DEPS \
     && chmod +x /usr/bin/ \
-    && wget -t 5 -T 99999 -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd \
-    && wget -t 5 -T 99999 -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd \
-    && wget -t 5 -T 99999 -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd \
     && mkdir -p /var/lib/clamav \
     && apk del .build-deps
 
