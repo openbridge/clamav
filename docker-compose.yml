@@ -1,7 +1,7 @@
 version: '3.1'
 services:
-  nginx:
-    image: clamd
+  clamav:
+    image: openbridge/clamav
     container_name: clamd
     ports:
       - 3310:3310
