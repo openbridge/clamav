@@ -7,6 +7,7 @@ set -o xtrace
 
 function crond() {
 
+  CRONFILE="/crontab.conf"
   if [[ -f "${CRONFILE}" ]]; then
     echo "OK: CRONFILE is present. Configuring crontab with settings in ${CRONFILE}..."
   else
@@ -45,20 +46,25 @@ function mode() {
 function freshclam() {
 
   # Update files if they are missing or older that X days
-  if [[ $(find "/var/lib/clamav/daily.cvd" -mtime +2 -print) ]] || [[ ! -f "/var/lib/clamav/daily.cvd" ]]; then
-    echo "Clamd files are missing or too old. Updating..."
+  if [[ ! -f "/var/lib/clamav/daily.cvd" ]]; then
+    echo "Clamd files are missing. Updating..."
     wget -t 5 -T 99999 -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
     wget -t 5 -T 99999 -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
     wget -t 5 -T 99999 -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
   else
-    echo "File clamd files exists and current"
+    echo "File clamd files exists"
+  fi
+
+  if [[ $(find "/var/lib/clamav/daily.cvd" -mtime +2 -print) ]]; then
+    echo "Clamd files are too old. Updating..."
+    echo "OK: Running freshclam to update virus databases. This can take a few minutes..."
+    sleep 1
+    run="freshclam -d -c 12 -p /var/run/freshclam.pid --quiet" && bash -c "${run}"
+  else
+    echo "File clamd files are current"
   fi
 
   chown clamav:clamav /var/lib/clamav/*.cvd
-
-  echo "OK: Running freshclam to update virus databases. This can take a few minutes..."
-  sleep 1
-  run="freshclam -d -c 12 -p /var/run/freshclam.pid --quiet" && bash -c "${run}"
 
 }
 
