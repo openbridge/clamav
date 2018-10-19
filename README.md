@@ -1,10 +1,9 @@
 
 # Docker ClamAV
 
-ClamAV daemon as an Alpine Linux based Docker image. It builds with a current virus database and runs `freshclam` in the background.
+We have paired Docker with ClamAV®. This delivers an easy to deploy open source (GPL) anti-virus engine used that can be used in variety of situations including email scanning, web scanning, and end point security.  
 
-`clamd` is listening on exposed port 3310.
-
+The service runs `clamd` within a lightweight Alpine Linux Docker image. This provides a portable, flexible and scalable multi-threaded daemon, a command line scanner, builds with the current virus databases and runs `freshclam` in the background.
 
 # Usage
 First, you can build the image or pull it:
@@ -31,8 +30,10 @@ docker-compose up -d
 
 There are a few different configuration files. The principle is for `clamd` as it governs the core behavior of the service.
 
+
 ## Clamd
-We use a default configuration for `clamav`:
+
+`clamd` is listening on exposed port 3310. We use a default configuration:
 
 ```bash
 LogSyslog yes
