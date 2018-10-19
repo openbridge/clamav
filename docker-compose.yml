@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  nginx:
+    image: clamd
+    container_name: clamd
+    ports:
+      - 3310:3310
+    tty: true
+    restart: unless-stopped
+    tmpfs: /var/cache
+    volumes:
+      - clamd_data:/var/lib/clamav
+    ulimits:
+      nproc: 65535
+      nofile:
+          soft: 49999
+          hard: 99999
+volumes:
+  clamd_data:
+    driver: local
