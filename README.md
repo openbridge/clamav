@@ -297,7 +297,7 @@ Here are the latest releases:
 
 | Docker Tag | Git Hub Release | Clamd Version | Alpine Version |
 |-----|-------|-----|--------|
-| latest | master  | 0.100.1 | 3.8 |
+| latest | master  | 0.100.3-r0 | 3.6 |
 
 
 # TODO
