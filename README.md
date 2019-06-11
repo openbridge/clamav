@@ -38,7 +38,6 @@ volumes:
 
 There are a few different configuration files. The principle is for `clamd` as it governs the core behavior of the service.
 
-
 ## Clamd
 
 `clamd` is listening on exposed port 3310. We use a default configuration:
