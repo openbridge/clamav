@@ -1,7 +1,7 @@
 
 # Docker ClamAV
 
-We have paired Docker with ClamAV®. This delivers an easy to deploy open source (GPL) anti-virus engine used that can be used in variety of situations including email scanning, web scanning, and end point security.  
+We have paired Docker with ClamAV®. This delivers an easy to deploy open source (GPL) anti-virus engine used that can be used in variety of situations including email scanning, web scanning, and end point security.
 
 The service runs `clamd` within a lightweight Alpine Linux Docker image. This provides a portable, flexible and scalable multi-threaded daemon, a command line scanner, builds with the current virus databases and runs `freshclam` in the background.
 
@@ -297,7 +297,7 @@ Here are the latest releases:
 
 | Docker Tag | Git Hub Release | Clamd Version | Alpine Version |
 |-----|-------|-----|--------|
-| latest | master  | 0.100.3-r0 | 3.6 |
+| latest | master  | 0.102.1/25811 | 3.11 |
 
 
 # TODO
