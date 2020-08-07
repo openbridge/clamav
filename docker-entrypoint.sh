@@ -4,7 +4,6 @@ set -o nounset
 set -o pipefail
 set -o xtrace
 
-
 function crond() {
 
   CRONFILE="/crontab.conf"
@@ -34,8 +33,10 @@ function crond() {
 
 function mode() {
 
-  PUBLICIPV4=$(route -n | awk '$2 ~/[1-9]+/ {print $2;}')
-  LOCALIPV4=$(route -n | awk '$2 ~/[1-9]+/ {print $2;}')
+  #PUBLICIPV4=$(route -n | awk '$2 ~/[1-9]+/ {print $2;}')
+  #LOCALIPV4=$(route -n | awk '$2 ~/[1-9]+/ {print $2;}')
+  LOCALIPV4=0.0.0.0
+  PUBLICIPV4=0.0.0.0
 
   export PUBLICIPV4
   export LOCALIPV4
