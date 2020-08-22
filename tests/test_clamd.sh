@@ -3,8 +3,6 @@ set -o xtrace
 set -o nounset
 set -o pipefail
 
-source /network
-
 PROCESS_ID=$(pidof clamd)
 if [[ -z $PROCESS_ID ]]; then
     echo "ERROR: Clamd process is not running. Start..."

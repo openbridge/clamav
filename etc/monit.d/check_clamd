@@ -5,16 +5,16 @@ check process clamd-process with pidfile /run/clamav/clamd.pid
     if cpu > 90% for 8 cycles then restart
     if 5 restarts within 5 cycles then timeout
 
-check program clamd-scan-check with path "/bin/bash -c '/tests/test_virus.sh'"
-    every 10 cycles
-    start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
-    stop program = "/bin/bash -c '/usr/bin/clam stop'"
-    if status != 0 for 2 cycles then stop
+#check program clamd-scan-check with path "/bin/bash -c '/tests/test_virus.sh'"
+#    every 10 cycles
+#    start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
+#    stop program = "/bin/bash -c '/usr/bin/clam stop'"
+#    if status != 0 for 2 cycles then timeout
 
-check host clamd-server-port with address {{PUBLICIPV4}}
-    start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
-    stop program = "/bin/bash -c '/usr/bin/clam stop'"
-    if failed port 3310 for 3 cycles then restart
+#check host clamd-server-port with address {{PUBLICIPV4}}
+#    start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
+#    stop program = "/bin/bash -c '/usr/bin/clam stop'"
+#    if failed port 3310 for 8 cycles then timeout
 
 check file clamd-db-main with path /var/lib/clamav/main.cvd
     if timestamp > 100 hour then exec "/usr/bin/freshclam --quiet"
