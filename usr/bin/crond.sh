@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 SERVICE_NAME="crond"
 SERVICE_CONF="-b"
 

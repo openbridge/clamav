@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 SERVICE_NAME="clamd"
 SERVICE_CONF="-c /etc/${SERVICE_NAME}.conf"
 
