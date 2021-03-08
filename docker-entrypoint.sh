@@ -52,16 +52,16 @@ function mode() {
 function freshclam() {
 
   # Update files if they are missing or older that X days
-  if [[ ! -f "/var/lib/clamav/daily.cvd" ]]; then
-    echo "Clamd files are missing. Updating..."
-    wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
-    wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
-    wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
-  else
-    echo "File clamd files exists"
-  fi
+#  if [[ ! -f "/var/lib/clamav/daily.cvd" ]]; then
+#    echo "Clamd files are missing. Updating..."
+ #   wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
+#    wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
+#    wget --user-agent='Mozilla/5.0 (clamav)' -t 5 -T 99999 -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
+#  else
+#    echo "File clamd files exists"
+ # fi
 
-  if [[ $(find "/var/lib/clamav/daily.cvd" -mtime +2 -print) ]]; then
+  if [[ $(find "/var/lib/clamav/daily.cvd" -mtime +2 -print) ]] || [[ ! -f "/var/lib/clamav/daily.cvd" ]]; then
     echo "Clamd files are too old. Updating..."
     echo "OK: Running freshclam to update virus databases. This can take a few minutes..."
     sleep 1
