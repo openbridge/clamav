@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.13
 MAINTAINER Thomas Spicer (thomas@openbridge.com)
 
 ENV CLAMD_DEPS \
@@ -14,11 +14,13 @@ RUN set -x \
         curl \
         clamav-daemon \
         clamav-libunrar \
+        freshclam \
         monit \
     && apk add --no-cache --virtual .build-deps \
         $CLAMD_DEPS \
     && chmod +x /usr/bin/ \
-    && mkdir -p /var/lib/clamav \
+    && mkdir -p /var/lib/clamav /run/clamav/ \
+    && chown -R clamav:clamav /var/lib/clamav/ \
     && apk del .build-deps
 
 COPY usr/bin/crond.sh /usr/bin/cron
